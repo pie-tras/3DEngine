@@ -1,6 +1,7 @@
 package com.draglantix.stateManager;
 
-import com.draglantix.renderer.MasterRenderer;
+import com.draglantix.engine.MasterRenderer;
+import com.draglantix.engine.MasterUpdater;
 import com.draglantix.states.MenuState;
 import com.draglantix.states.PlayState;
 import com.draglantix.window.Window;
@@ -14,9 +15,9 @@ public class GameStateManager {
 	private MenuState menuState;
 	private PlayState playState;
 	
-	public GameStateManager(State startState, Window window, MasterRenderer renderer){
-		menuState = new MenuState(this, window, renderer);
-		playState = new PlayState(this, window, renderer);
+	public GameStateManager(State startState, Window window, MasterRenderer renderer, MasterUpdater updater){
+		menuState = new MenuState(this, window, renderer, updater);
+		playState = new PlayState(this, window, renderer, updater);
 		
 		currentState = startState;
 		setState(currentState);

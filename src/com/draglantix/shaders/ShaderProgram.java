@@ -12,36 +12,43 @@ public class ShaderProgram {
 
 	private int programID;
 
-	public ShaderProgram(FileLoader vertexFile, FileLoader fragmentFile, String... inVariables) {
-		int vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
-		int fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
-		programID = GL20.glCreateProgram();
-		GL20.glAttachShader(programID, vertexShaderID);
-		GL20.glAttachShader(programID, fragmentShaderID);
-		bindAttributes(inVariables);
-		GL20.glLinkProgram(programID);
-		GL20.glDetachShader(programID, vertexShaderID);
-		GL20.glDetachShader(programID, fragmentShaderID);
-		GL20.glDeleteShader(vertexShaderID);
-		GL20.glDeleteShader(fragmentShaderID);
-	}
-	
-	public ShaderProgram(FileLoader vertexFile, FileLoader geometryFile, FileLoader fragmentFile, String... inVariables) {
-		int vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
-		int geometryShaderID = loadShader(geometryFile, GL32.GL_GEOMETRY_SHADER);
-		int fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
-		programID = GL20.glCreateProgram();
-		GL20.glAttachShader(programID, vertexShaderID);
-		GL20.glAttachShader(programID, geometryShaderID);
-		GL20.glAttachShader(programID, fragmentShaderID);
-		bindAttributes(inVariables);
-		GL20.glLinkProgram(programID);
-		GL20.glDetachShader(programID, vertexShaderID);
-		GL20.glDetachShader(programID, geometryShaderID);
-		GL20.glDetachShader(programID, fragmentShaderID);
-		GL20.glDeleteShader(vertexShaderID);
-		GL20.glDeleteShader(geometryShaderID);
-		GL20.glDeleteShader(fragmentShaderID);
+	public ShaderProgram(String key, boolean useGeoShader, String... inVariables) {
+		if(useGeoShader) {
+			FileLoader vertexFile = new FileLoader("shaders/"+key+"/vertex.glsl");
+			FileLoader geometryFile = new FileLoader("shaders/"+key+"/geometry.glsl");
+			FileLoader fragmentFile = new FileLoader("shaders/"+key+"/fragment.glsl");
+			
+			int vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
+			int geometryShaderID = loadShader(geometryFile, GL32.GL_GEOMETRY_SHADER);
+			int fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
+			programID = GL20.glCreateProgram();
+			GL20.glAttachShader(programID, vertexShaderID);
+			GL20.glAttachShader(programID, geometryShaderID);
+			GL20.glAttachShader(programID, fragmentShaderID);
+			bindAttributes(inVariables);
+			GL20.glLinkProgram(programID);
+			GL20.glDetachShader(programID, vertexShaderID);
+			GL20.glDetachShader(programID, geometryShaderID);
+			GL20.glDetachShader(programID, fragmentShaderID);
+			GL20.glDeleteShader(vertexShaderID);
+			GL20.glDeleteShader(geometryShaderID);
+			GL20.glDeleteShader(fragmentShaderID);
+		}else {
+			FileLoader vertexFile = new FileLoader("shaders/"+key+"/vertex.glsl");
+			FileLoader fragmentFile = new FileLoader("shaders/"+key+"/fragment.glsl");
+			
+			int vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
+			int fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
+			programID = GL20.glCreateProgram();
+			GL20.glAttachShader(programID, vertexShaderID);
+			GL20.glAttachShader(programID, fragmentShaderID);
+			bindAttributes(inVariables);
+			GL20.glLinkProgram(programID);
+			GL20.glDetachShader(programID, vertexShaderID);
+			GL20.glDetachShader(programID, fragmentShaderID);
+			GL20.glDeleteShader(vertexShaderID);
+			GL20.glDeleteShader(fragmentShaderID);
+		}
 	}
 	
 	protected void storeAllUniformLocations(Uniform... uniforms){

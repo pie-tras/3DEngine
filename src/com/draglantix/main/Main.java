@@ -1,20 +1,16 @@
 package com.draglantix.main;
 
-import com.draglantix.renderer.MasterRenderer;
+import com.draglantix.engine.Camera;
+import com.draglantix.engine.MasterRenderer;
+import com.draglantix.engine.MasterUpdater;
 import com.draglantix.stateManager.GameStateManager;
 import com.draglantix.stateManager.State;
 import com.draglantix.util.CleanUpMaster;
 import com.draglantix.window.Window;
 
 public class Main {
-
-	private final float VERSION = 0.01f;
-	private final String TITLE = "Game v";
-	private boolean printFPS = true;
 	
 	private Window window;
-	
-	private MasterRenderer renderer;
 	private GameStateManager gsm;
 	
 	private FPSHandler fpsHandler;
@@ -25,12 +21,9 @@ public class Main {
 	}
 	
 	private void init() {
-		window = new Window(800, 600, TITLE+VERSION);
-	
-		renderer = new MasterRenderer();
-		gsm = new GameStateManager(State.MENU, window, renderer);
-		
-		fpsHandler = new FPSHandler(printFPS);
+		window = new Window(Configs.WIDTH, Configs.HEIGHT, Configs.TITLE+Configs.VERSION);
+		gsm = new GameStateManager(State.MENU, window, new MasterRenderer(), new MasterUpdater(new Camera()));	
+		fpsHandler = new FPSHandler(Configs.PRINT_FPS);
 	}
 	
 	private void run() {

@@ -1,19 +1,23 @@
 package com.draglantix.stateManager;
 
-import com.draglantix.renderer.MasterRenderer;
+import com.draglantix.engine.MasterRenderer;
+import com.draglantix.engine.MasterUpdater;
 import com.draglantix.window.Window;
 import com.draglantix.window.WindowHandler;
 
 public abstract class GameState {
 
 	private Window window;
-	protected MasterRenderer renderer;
 	private GameStateManager gsm;
 	
-	public GameState(GameStateManager gsm, Window window, MasterRenderer renderer) {
+	protected MasterRenderer renderer;
+	protected MasterUpdater updater;
+	
+	public GameState(GameStateManager gsm, Window window, MasterRenderer renderer, MasterUpdater updater) {
 		this.gsm = gsm;
 		this.window = window;
 		this.renderer = renderer;
+		this.updater = updater;
 	}
 	
 	protected abstract void tick();

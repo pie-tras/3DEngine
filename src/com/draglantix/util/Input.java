@@ -9,11 +9,18 @@ import java.nio.DoubleBuffer;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWScrollCallback;
+
+import com.draglantix.window.Window;
 
 public class Input {
 	private long window;
 	
 	private boolean keys[];
+	
+	private Vector2f lastMousePos = new Vector2f();
+	
+	private float zoom;
 	
 	public Input(long window) {
 		this.window = window;
@@ -45,6 +52,22 @@ public class Input {
 		double x = xBuffer.get(0);
 		double y = yBuffer.get(0);
 		return new Vector2f((float)x, (float)y);
+	}
+	
+	public Vector2f getMouseDelta() {
+		return getMousePos().sub(lastMousePos);
+	}
+	
+	public void updateMouseDelta() {
+		lastMousePos = getMousePos();
+	}
+	
+	public float getZoom() {
+		zoom = 0;
+		GLFW.glfwSetScrollCallback(Window.getWindow(), GLFWScrollCallback.create((window, xoffset, yoffset) -> {
+			zoom = (float) yoffset;
+		}));
+		return zoom;
 	}
 	
 	public void setMousePos(double xpos, double ypos) {
