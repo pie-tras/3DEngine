@@ -1,4 +1,4 @@
-package com.draglantx.renderer;
+package com.draglantix.renderer;
 
 import com.draglantix.shaders.ShaderProgram;
 import com.draglantix.shaders.UniformMatrix;

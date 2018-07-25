@@ -5,7 +5,7 @@ import org.joml.Vector4f;
 import com.draglantix.engine.Camera;
 import com.draglantix.engine.Light;
 import com.draglantix.glObject.Vao;
-import com.draglantx.renderer.TerrainRenderer;
+import com.draglantix.renderer.TerrainRenderer;
 
 public class Terrain {
 	

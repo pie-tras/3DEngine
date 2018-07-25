@@ -4,10 +4,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import com.draglantix.glObject.Vao;
+import com.draglantix.renderer.TerrainRenderer;
+import com.draglantix.renderer.TerrainShader;
 import com.draglantix.util.Color;
 import com.draglantix.vertexDataStoring.VaoLoader;
-import com.draglantx.renderer.TerrainRenderer;
-import com.draglantx.renderer.TerrainShader;
 
 public class HybridTerrainGenerator extends TerrainGenerator {
 

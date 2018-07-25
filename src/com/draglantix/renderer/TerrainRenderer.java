@@ -1,4 +1,4 @@
-package com.draglantx.renderer;
+package com.draglantix.renderer;
 
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
